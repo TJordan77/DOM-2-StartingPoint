@@ -75,7 +75,6 @@ function fillAllCells() {
   });
 }
 
-
 // clear all cells
 function clearAllCells() {
   const cells = document.querySelectorAll('td');
