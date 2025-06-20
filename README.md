@@ -1,5 +1,9 @@
 # DOM II Assignment
 
+EDIT: Hold left click and drag the mouse to color in cells. Hold right click and drag to erase them.
+
+
+
 This is the starting point for the DOM II assignment. On your team, pick one person to be the owner of the repo.
 
 That person will "fork" this repository. Then, they will add the other members of the group as collaborators.
