@@ -16,10 +16,10 @@ addRows.addEventListener("click", () => {
   for (let i = 0; i < getTable.rows[0].cells.length; i++) {
     const newCells = newRow.insertCell();
   }
+  cellListeners(); // Mouse dragging won't work unless it accounts for new cells added
 });
 
 // add columns to grid
-
 const addColumns = document.getElementById("add-column");
 
 addColumns.addEventListener("click", () => {
@@ -28,10 +28,11 @@ addColumns.addEventListener("click", () => {
     const newCells = document.createElement("td");
     row.appendChild(newCells);
   }
+  cellListeners(); // Mouse dragging won't work unless it accounts for new cells added
 });
 
-// remove rows from the grid
 
+// remove rows from the grid
 const deleteRows = document.getElementById("delete-rows");
 
 deleteRows.addEventListener("click", () => {
@@ -41,8 +42,8 @@ deleteRows.addEventListener("click", () => {
   console.log("rows have been deleted from the table with event listener");
 });
 
-//remove columns from grid
 
+//remove columns from grid
 const deleteColumns = document.getElementById("delete-columns");
 
 deleteColumns.addEventListener("click", () => {
@@ -55,7 +56,6 @@ deleteColumns.addEventListener("click", () => {
 });
 
 // Emmanuel
-
 // Select a color from a dropdown menu of colors
 const colorSelect = document.getElementById("color-select");
 
@@ -63,3 +63,26 @@ colorSelect.addEventListener("change", () => {
   const selectedColor = colorSelect.value;
   console.log("Selected color: ", selectedColor);
 });
+
+
+
+// fill all cells with selected color
+function fillAllCells() {
+  const color = document.getElementById('color-select').value;
+  const cells = document.querySelectorAll('td');
+
+  cells.forEach(cell => {
+    cell.style.backgroundColor = color;
+  });
+}
+
+
+// Fill and clear buttons
+document.getElementById("fill-grid").addEventListener("click", fillAllCells);
+document.getElementById("clear-grid").addEventListener("click", clearAllCells);
+
+// A little listener for the grid cells
+cellListeners();
+
+
+
