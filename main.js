@@ -65,7 +65,6 @@ colorSelect.addEventListener("change", () => {
 });
 
 
-
 // fill all cells with selected color
 function fillAllCells() {
   const color = document.getElementById('color-select').value;
@@ -76,6 +75,72 @@ function fillAllCells() {
   });
 }
 
+// clear all cells
+function clearAllCells() {
+  const cells = document.querySelectorAll('td');
+
+  cells.forEach(cell => {
+    cell.style.backgroundColor = '';
+  });
+}
+
+// color helper
+function colorCell(e) {
+  const color = document.getElementById("color-select").value;
+  e.target.style.backgroundColor = color;
+}
+
+
+// Emmanuel features-end 
+
+/* click and hold (mouseover) from a single cell (start) to a different cell (end) 
+such that all affected/hovered-over cells from start to end change to the currently selected color
+*/
+
+let isMouseDown = false;
+let mouseButton = 0;
+
+function cellListeners() {
+  const cells = document.querySelectorAll("td");
+
+  cells.forEach(cell => {
+    // Prevent right-click menu
+    cell.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+    });
+
+    cell.addEventListener("mousedown", (e) => {
+      isMouseDown = true;
+      mouseButton = e.button; // 0 = left, 2 = right
+      applyMouseAction(e);
+    });
+
+    cell.addEventListener("mouseover", (e) => {
+      if (isMouseDown) {
+        applyMouseAction(e);
+      }
+    });
+
+    cell.addEventListener("mouseup", () => {
+      isMouseDown = false;
+    });
+  });
+}
+
+
+// 0 for left click, 2 for right click
+function applyMouseAction(e) {
+  if (mouseButton === 0) { 
+    colorCell(e);
+  } else if (mouseButton === 2) {
+    e.target.style.backgroundColor = "";
+  }
+}
+
+// Making sure mouse stops coloring when button is released
+document.body.addEventListener("mouseup", () => {
+  isMouseDown = false;
+});
 
 // Fill and clear buttons
 document.getElementById("fill-grid").addEventListener("click", fillAllCells);
